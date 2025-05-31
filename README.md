@@ -131,16 +131,16 @@ Upload your file (PDF, JSON, or TXT) through the UI and see extracted data in re
 ├── requirements.txt         # Python dependencies
 └── README.md                # This file
 ```
-🤝 Contribution
+## 🤝 Contribution
 Contributions are welcome! Feel free to open issues or submit pull requests for enhancements, bug fixes, or new features.
 
-❓ FAQ
+## ❓ FAQ
 Q: Can I add support for more document types?
 A: Yes! Simply add a new specialized agent inside agents/ and update the classifier logic to route that type.
 
 Q: Does this system support authentication?
 A: Not yet — but it can be integrated easily using FastAPI's security modules or middleware.
 
-🧑‍💻 Author
+## 🧑‍💻 Author
 Made with ❤️ by Anshi Agarwal
 
