@@ -1,4 +1,4 @@
-# Multi-Agent System with Contextual Decisioning & Chained Actions
+![1000056988](https://github.com/user-attachments/assets/4da9d84a-3105-49c0-9a2c-6fc467bb8cff)# Multi-Agent System with Contextual Decisioning & Chained Actions
 
 ![Project Logo](https://img.shields.io/badge/Multi--Agent%20System-AI-blue?style=flat-square)
 
@@ -143,4 +143,11 @@ A: Not yet — but it can be integrated easily using FastAPI's security modules 
 
 ## 🧑‍💻 Author
 Made with ❤️ by Anshi Agarwal
+
+## Demo Screenshot of this project
+![1000056989](https://github.com/user-attachments/assets/43e11994-75c8-4c09-be15-b20208b567cc)
+![1000056991](https://github.com/user-attachments/assets/e67dd43b-47ae-4185-aea6-c9068f9fa30e)
+![1000056988](https://github.com/user-attachments/assets/9774fb3e-995c-466f-9fb9-2660c0d5bf96)
+![1000056990](https://github.com/user-attachments/assets/ad25d420-9875-478a-b7db-56ec869e89d6)
+
 
