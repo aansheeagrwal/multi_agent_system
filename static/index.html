@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Agent System File Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    form {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+    }
+    input[type="file"] {
+      flex: 1;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      min-height: 150px;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+      margin-top: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload File to Multi-Agent System</h1>
+  
+  <form id="uploadForm">
+    <input type="file" id="fileInput" name="file" accept=".txt,.pdf,.json" required />
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>Result:</h2>
+  <pre id="resultOutput">No result yet</pre>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const resultOutput = document.getElementById('resultOutput');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a file to upload.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      resultOutput.textContent = "Uploading and processing...";
+
+      try {
+        const response = await fetch('/api/process-file/', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          resultOutput.textContent = `Error: ${errorData.detail || 'Unknown error'}`;
+          resultOutput.classList.add('error');
+          return;
+        }
+
+        const data = await response.json();
+        resultOutput.classList.remove('error');
+        // Show formatted JSON result
+        resultOutput.textContent = JSON.stringify(data.result, null, 2);
+
+      } catch (err) {
+        resultOutput.classList.add('error');
+        resultOutput.textContent = 'Network error: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

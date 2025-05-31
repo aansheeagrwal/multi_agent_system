@@ -1,0 +1,12 @@
+From: customer@example.com
+To: support@yourcompany.com
+Subject: Urgent Complaint Regarding Service Quality
+
+Dear Support Team,
+
+I am extremely disappointed with the recent experience I had with your services. The system was down for over 48 hours and no one from your team responded to our queries. This is completely unacceptable.
+
+Please escalate this issue to the highest level. If I don’t receive a response within 24 hours, I will be forced to take further action.
+
+Regards,
+An Angry Customer

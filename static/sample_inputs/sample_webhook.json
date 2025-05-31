@@ -1,0 +1,12 @@
+{
+    "webhook_id": "abc123",
+    "event_type": "transaction_alert",
+    "timestamp": "2025-05-30T10:30:00Z",
+    "payload": {
+        "user_id": "user789",
+        "amount": 12000,
+        "currency": "USD",
+        "description": "High-value transfer detected",
+        "risk_flag": true
+    }
+}

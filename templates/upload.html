@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Agent File Processor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    input[type=file] {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      background: #e9ffe9;
+      border: 1px solid #5cb85c;
+      color: #3c763d;
+      display: none;
+    }
+    .error {
+      background: #ffe9e9;
+      border: 1px solid #d9534f;
+      color: #a94442;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload File to Process</h1>
+  <form id="upload-form">
+    <input type="file" id="file-input" name="file" required />
+    <button type="submit">Upload & Process</button>
+  </form>
+  <div class="result" id="result"></div>
+  <div class="error" id="error"></div>
+
+  <script>
+    const form = document.getElementById('upload-form');
+    const resultDiv = document.getElementById('result');
+    const errorDiv = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resultDiv.style.display = 'none';
+      errorDiv.style.display = 'none';
+
+      const fileInput = document.getElementById('file-input');
+      if (!fileInput.files.length) {
+        errorDiv.textContent = 'Please select a file.';
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        const response = await fetch('/api/process-file/', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.detail || 'Unknown error');
+        }
+
+        const data = await response.json();
+        resultDiv.textContent = JSON.stringify(data.result, null, 2);
+        resultDiv.style.display = 'block';
+
+      } catch (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
